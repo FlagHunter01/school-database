@@ -100,10 +100,10 @@ INSERT INTO centre VALUES (44, "électricité");
 INSERT INTO centre VALUES (45, "gaz");
 
 /* "fournisseur"*/
-INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 1')
-INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 2')
-INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 3')
-INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 4')
+INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 1');
+INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 2');
+INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 3');
+INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 4');
 
 /* "ville"*/
 INSERT INTO ville VALUES (10100, "Ville 1", "10");
