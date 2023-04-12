@@ -28,7 +28,7 @@ INSERT INTO personne VALUES (37, "LEGRAND 24", "Paul 24");
 INSERT INTO personne VALUES (56, "LEGRAND 25", "Paul 25");
 INSERT INTO personne VALUES (97, "LEGRAND 26", "Paul 26");
 INSERT INTO personne VALUES (80, "LEGRAND 27", "Paul 27");
-INSERT INTO personne VALUES (89, "LEGRAND 28", "Paul 28");
+INSERT INTO personne VALUES (101, "LEGRAND 28", "Paul 28");
 INSERT INTO personne VALUES (25, "LEGRAND 29", "Paul 29");
 INSERT INTO personne VALUES (2, "LEGRAND 30", "Paul 30");
 INSERT INTO personne VALUES (58, "LEGRAND 31", "Paul 31");
