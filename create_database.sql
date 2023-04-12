@@ -34,6 +34,7 @@ CREATE TABLE consomme (
     FOREIGN KEY (num_client) REFERENCES personne(num_client)
         ON UPDATE CASCADE
         ON DELETE CASCADE
+    FOREIGN KEY (identifiant_centre) REFERENCES centre(identifiant)
 );
 
 DROP TABLE IF EXISTS facture;
