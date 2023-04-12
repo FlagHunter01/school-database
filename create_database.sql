@@ -46,7 +46,7 @@ CREATE TABLE facture (
     FOREIGN KEY (num_client) REFERENCES personne(num_client)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    FOREIGN KEY REFERENCES fournisseur(nom)
+    FOREIGN KEY  (nom_fournisseur) REFERENCES fournisseur(nom)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
