@@ -106,11 +106,11 @@ INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 3')
 INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 4')
 
 /* "ville"*/
-INSERT INTO ville VALUES (10100, "Camembert", "10");
-INSERT INTO ville VALUES (10200, "Roquefort", "10");
-INSERT INTO ville VALUES (20100, "Fortville", "20");
-INSERT INTO ville VALUES (20200, "Arnac La Poste", "20");
-INSERT INTO ville VALUES (30100, "Ville Forte", "30");
-INSERT INTO ville VALUES (40100, "Tabarnaque", "40");
-INSERT INTO ville VALUES (50100, "Ville SurR iviere", "50");
-INSERT INTO ville VALUES (50200, "Mont Sainte Micheline", "50");
+INSERT INTO ville VALUES (10100, "Ville 1", "10");
+INSERT INTO ville VALUES (10200, "Ville 2", "10");
+INSERT INTO ville VALUES (20100, "Ville 3", "20");
+INSERT INTO ville VALUES (20200, "Ville 4", "20");
+INSERT INTO ville VALUES (30100, "Ville 5", "30");
+INSERT INTO ville VALUES (40100, "Ville 6", "40");
+INSERT INTO ville VALUES (50100, "Ville 7", "50");
+INSERT INTO ville VALUES (50200, "Ville 8", "50");
