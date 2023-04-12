@@ -1,3 +1,5 @@
+/* Tables principales */
+
 /* "personne"*/
 INSERT INTO personne VALUES (3, "LEGRAND 1", "Paul 1");
 INSERT INTO personne VALUES (89, "LEGRAND 2", "Paul 2");
@@ -98,7 +100,17 @@ INSERT INTO centre VALUES (44, "électricité");
 INSERT INTO centre VALUES (45, "gaz");
 
 /* "fournisseur"*/
-INSERT INTO fournisseur VALUES (Fournisseur 1);
-INSERT INTO fournisseur VALUES (Fournisseur 2);
-INSERT INTO fournisseur VALUES (Fournisseur 3);
-INSERT INTO fournisseur VALUES (Fournisseur 4);
+INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 1')
+INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 2')
+INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 3')
+INSERT INTO `fournisseur`(`nom`) VALUES ('Fournisseur 4')
+
+/* "ville"*/
+INSERT INTO ville VALUES (10100, "Camembert", "10");
+INSERT INTO ville VALUES (10200, "Roquefort", "10");
+INSERT INTO ville VALUES (20100, "Fortville", "20");
+INSERT INTO ville VALUES (20200, "Arnac La Poste", "20");
+INSERT INTO ville VALUES (30100, "Ville Forte", "30");
+INSERT INTO ville VALUES (40100, "Tabarnaque", "40");
+INSERT INTO ville VALUES (50100, "Ville SurR iviere", "50");
+INSERT INTO ville VALUES (50200, "Mont Sainte Micheline", "50");
