@@ -31,7 +31,11 @@ DROP TABLE IF EXISTS consomme;
 CREATE TABLE consomme (
     quantite int NOT NULL,
     num_client int NOT NULL,
+    id_centre int NOT NULL,
     FOREIGN KEY (num_client) REFERENCES personne(num_client)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (id_centre) REFERENCES centre(identifiant)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
