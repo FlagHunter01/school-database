@@ -13,11 +13,9 @@ order by fournisseur.nom ASC, ville.departement ASC
 
 # Départements dans lesquels est distribuée chaque énergie pour le fournisseur 1
 SELECT DISTINCT ville.departement, centre.type_centrale
-FROM ville, appartient, situe, centre
+FROM ville INNER JOIN situe ON ville.code_postal = situe.code_postal, appartient INNER JOIN centre ON centre.identifiant = appartient.identifiant_centre
 WHERE STRCMP(appartient.nom_fournisseur, 'fournisseur 1') = 0 
-AND centre.identifiant = appartient.identifiant_centre
-AND situe.identifiant_centre = appartient.identifiant_centre
-AND ville.code_postal = situe.code_postal
+AND situe.identifiant_centre = appartient.identifiant_centre;
 
 # Centres et énergie du fournisseur 1 dans le département 10
 SELECT DISTINCT centre.identifiant as Identifiant_centre, centre.type_centrale as Type_energie
@@ -27,13 +25,13 @@ AND ville.departement = 10
 AND situe.identifiant_centre = centre.identifiant
 AND STRCMP(appartient.nom_fournisseur, 'fournisseur 1') = 0;
 
-# Revenu total du dépaertement
-SELECT ville.departement as Departement, SUM(facture.prix_kWh * consomme.quantite) AS Revenu_total
-FROM facture, ville, habite, centre, consomme
-WHERE facture.num_client = consomme.num_client
-AND facture.num_client = habite.num_client 
-AND habite.code_postal = ville.code_postal
-GROUP BY ville.departement
+# Revenu total du dépaertement par fournisseur
+SELECT fournisseur.nom AS Nom_fournisseur, ville.departement as Departement, SUM(facture.prix_kWh * consomme.quantite) AS Revenu_total
+FROM ville  INNER JOIN  habite ON habite.code_postal = ville.code_postal, fournisseur, centre, facture INNER JOIN consomme ON facture.num_client = consomme.num_client
+WHERE facture.num_client = habite.num_client 
+AND fournisseur.nom = facture.nom_fournisseur
+GROUP BY ville.departement, fournisseur.nom
+ORDER BY fournisseur.nom ASC, ville.departement ASC
 
 
 # Quantité de chaque énergie distribuée par chaque Centrale
