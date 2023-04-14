@@ -8,6 +8,6 @@
  - Présence du fournisseur dans les départements
  - Départements dans lesquels est distribuée chaque énergie
  - Centres et énergie du fournisseur dans le département
- - Revenu total du dépaertement
+ - Revenu total du département
  - Quantité de chaque énergie distribuée dans chaque département
  - Revenu pour chaque énergie dans chaque département
