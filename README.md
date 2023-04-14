@@ -6,11 +6,13 @@
 ## Requetes
 
 - Le nombre de Centrales par fourniseur
+
 SELECT appartient.nom_fournisseur as Nom_fournisseur, COUNT(DISTINCT identifiant_centre) as Nombre_de_centrales 
 FROM appartient 
 GROUP BY appartient.nom_fournisseur; 
 
  - Présence du fournisseur dans les départements
+
 SELECT DISTINCT fournisseur.nom as Nom_fournisseur, ville.departement as Departement
 FROM fournisseur INNER JOIN facture, ville INNER JOIN habite
 WHERE facture.num_client = habite.num_client
