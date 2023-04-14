@@ -29,6 +29,7 @@ CREATE TABLE fournisseur (
 
 DROP TABLE IF EXISTS consomme;
 CREATE TABLE consomme (
+    id_consommateur int NOT NULL PRIMARY KEY,
     quantite int NOT NULL,
     num_client int NOT NULL,
     id_centre int NOT NULL,
@@ -59,7 +60,7 @@ DROP TABLE IF EXISTS situe;
 CREATE TABLE situe (
     identifiant_centre int NOT NULL,
     code_postal int NOT NULL,
-    addresse varchar(50) NOT NULL,
+    addresse varchar(50) NOT NULL PRIMARY KEY,
     FOREIGN KEY (code_postal) REFERENCES ville(code_postal)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
@@ -70,6 +71,7 @@ CREATE TABLE situe (
 
 DROP TABLE IF EXISTS appartient;
 CREATE TABLE appartient (
+    contrat int NOT NULL PRIMARY KEY,
     nom_fournisseur varchar(45) NOT NULL,
     identifiant_centre int NOT NULL,
     FOREIGN KEY (identifiant_centre) REFERENCES centre(identifiant)
@@ -84,7 +86,7 @@ DROP TABLE IF EXISTS habite;
 CREATE TABLE habite (
     num_client int NOT NULL,
     code_postal int NOT NULL,
-    addresse varchar(50) NOT NULL,
+    addresse varchar(50) NOT NULL PRIMARY KEY,
     FOREIGN KEY (num_client) REFERENCES personne(num_client)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
