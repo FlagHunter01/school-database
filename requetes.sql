@@ -19,10 +19,9 @@ AND situe.identifiant_centre = appartient.identifiant_centre;
 
 # Centres et énergie du fournisseur 1 dans le département 10
 SELECT DISTINCT centre.identifiant as Identifiant_centre, centre.type_centrale as Type_energie
-FROM centre, situe, ville, appartient
+FROM centre INNER JOIN situe ON situe.identifiant_centre = centre.identifiant, ville, appartient
 WHERE situe.code_postal = ville.code_postal
 AND ville.departement = 10
-AND situe.identifiant_centre = centre.identifiant
 AND STRCMP(appartient.nom_fournisseur, 'fournisseur 1') = 0;
 
 # Revenu total du dépaertement par fournisseur
