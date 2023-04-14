@@ -43,38 +43,37 @@ WHERE consomme.id_centre = centre.identifiant GROUP BY consomme.id_centre
 ORDER BY centre.identifiant ASC 
 
 # Quantité de chaque énergie distribuée dans chaque département
-SELECT ville.departement as departement, centre.type_centrale as type_energie, SUM(DISTINCT consomme.quantite) as Quantite 
-FROM consomme, centre,  situe, ville
-WHERE consomme.id_centre = centre.identifiant
-AND situe.identifiant_centre = consomme.id_centre
-AND situe.code_postal = ville.code_postal
+SELECT ville.departement as departement, centre.type_centrale as type_energie, SUM(DISTINCT consomme.quantite) as Quantite_consommee
+FROM consomme INNER JOIN centre ON consomme.id_centre = centre.identifiant, situe INNER JOIN ville ON situe.code_postal = ville.code_postal
+WHERE situe.identifiant_centre = consomme.id_centre
 GROUP BY ville.departement, centre.type_centrale
-ORDER BY ville.departement ASC, centre.type_centrale ASC; 
+ORDER BY ville.departement ASC, centre.type_centrale ASC;
 
 
 # Revenu pour chaque énergie dans chaque département
 SELECT ville.departement as departement, centre.type_centrale as type_energie, SUM(DISTINCT consomme.quantite * facture.prix_kWh) as Revenu_total 
-FROM consomme, centre,  situe, ville, facture
-WHERE consomme.id_centre = centre.identifiant
-AND situe.identifiant_centre = consomme.id_centre
-AND situe.code_postal = ville.code_postal
+FROM consomme INNER JOIN centre ON consomme.id_centre = centre.identifiant, facture, situe INNER JOIN ville ON situe.code_postal = ville.code_postal
+WHERE situe.identifiant_centre = consomme.id_centre
 AND facture.num_client = consomme.num_client
 GROUP BY ville.departement, centre.type_centrale
 ORDER BY ville.departement ASC, centre.type_centrale ASC;
 
 # Revenu pour chaque énergie dans chaque département du fournisseur 1
 SELECT ville.departement as departement, centre.type_centrale as type_energie, SUM(DISTINCT consomme.quantite * facture.prix_kWh) as Revenu
-FROM consomme, centre,  situe, ville, facture
+FROM consomme, centre, facture, situe INNER JOIN ville ON situe.code_postal = ville.code_postal
 WHERE consomme.id_centre = centre.identifiant
 AND STRCMP(facture.nom_fournisseur, 'fournisseur 1') = 0
 AND situe.identifiant_centre = consomme.id_centre
-AND situe.code_postal = ville.code_postal
 AND facture.num_client = consomme.num_client
 GROUP BY ville.departement, centre.type_centrale
 ORDER BY ville.departement ASC, centre.type_centrale ASC;
 
 # Prix de la facture de chaque Client en fonction de sa consommation sur le mois
 SELECT DISTINCT facture.num_client, (facture.prix_kWh * consomme.quantite) AS Prix_total_facture
-FROM facture, ville, habite, centre, consomme
-WHERE facture.num_client = consomme.num_client
-GROUP BY facture.num_client
+FROM facture INNER JOIN consomme ON facture.num_client = consomme.num_client;
+
+# Nombre total de personnes en fonction du département et du fournisseur
+SELECT fournisseur.nom, ville.departement as Departement, SUM(DISTINCT personne.num_client) as Nombre_clients
+FROM personne, habite INNER JOIN ville ON habite.code_postal = ville.code_postal, fournisseur
+WHERE habite.num_client = personne.num_client
+GROUP BY fournisseur.nom, ville.departement;
