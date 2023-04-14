@@ -19,7 +19,6 @@ AND centre.identifiant = appartient.identifiant_centre
 AND situe.identifiant_centre = appartient.identifiant_centre
 AND ville.code_postal = situe.code_postal
 
-
 # Centres et énergie du fournisseur 1 dans le département // TODO FIXE STRCMP
 SELECT DISTINCT centre.identifiant as Identifiant_centre, centre.type_centrale as Type_energie
 FROM centre, situe, ville
@@ -31,15 +30,17 @@ AND EXISTS (SELECT centre.identifiant
             AND  centre.identifiant = appartient.identifiant_centre)
 
 
-
-# Revenu total du dépaertement
-SELECT 
-FROM facture, ville Inner situe, centre INNer situe
-WHERE
+# Revenu total du dépaertement // TODO check
+SELECT ville.departement as Departement, SUM(facture.prix_kWh * consomme.quantite) AS Revenu_total
+FROM facture, ville, habite, centre, consomme
+WHERE facture.num_client = consomme.num_client
+AND facture.num_client = habite.num_client 
+AND habite.code_postal = ville.code_postal
+GROUP BY ville.departement
 
 
 # Quantité de chaque énergie distribuée dans chaque département
-SELECT
+SELECT 
 FROM 
 WHERE
 
@@ -47,3 +48,9 @@ WHERE
 SELECT
 FROM 
 WHERE
+
+# Prix de la facture de chaque Client en fonction de sa consommation sur le mois
+SELECT DISTINCT facture.num_client, (facture.prix_kWh * consomme.quantite) AS Prix_total_facture
+FROM facture, ville, habite, centre, consomme
+WHERE facture.num_client = consomme.num_client
+GROUP BY facture.num_client
