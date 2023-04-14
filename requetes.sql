@@ -74,7 +74,8 @@ SELECT DISTINCT facture.num_client, (facture.prix_kWh * consomme.quantite) AS Pr
 FROM facture INNER JOIN consomme ON facture.num_client = consomme.num_client;
 
 # Nombre total de personnes en fonction du département et du fournisseur
-SELECT fournisseur.nom, ville.departement as Departement, SUM(DISTINCT personne.num_client) as Nombre_clients
+SELECT fournisseur.nom, ville.departement as Departement, COUNT(DISTINCT personne.num_client) as Nombre_clients
 FROM personne, habite INNER JOIN ville ON habite.code_postal = ville.code_postal, fournisseur
 WHERE habite.num_client = personne.num_client
-GROUP BY fournisseur.nom, ville.departement;
+GROUP BY fournisseur.nom, ville.departement
+ORDER BY fournisseur.nom;
