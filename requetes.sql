@@ -30,7 +30,7 @@ AND EXISTS (SELECT centre.identifiant
             AND  centre.identifiant = appartient.identifiant_centre)
 
 
-# Revenu total du dépaertement // TODO check
+# Revenu total du dépaertement
 SELECT ville.departement as Departement, SUM(facture.prix_kWh * consomme.quantite) AS Revenu_total
 FROM facture, ville, habite, centre, consomme
 WHERE facture.num_client = consomme.num_client
@@ -39,15 +39,42 @@ AND habite.code_postal = ville.code_postal
 GROUP BY ville.departement
 
 
+# Quantité de chaque énergie distribuée par chaque Centrale
+SELECT centre.type_centrale as type_energie, centre.identifiant, SUM(DISTINCT consomme.quantite) as Quantite 
+FROM consomme, centre 
+WHERE consomme.id_centre = centre.identifiant GROUP BY consomme.id_centre 
+ORDER BY centre.identifiant ASC 
+
 # Quantité de chaque énergie distribuée dans chaque département
-SELECT 
-FROM 
-WHERE
+SELECT ville.departement as departement, centre.type_centrale as type_energie, SUM(DISTINCT consomme.quantite) as Quantite 
+FROM consomme, centre,  situe, ville
+WHERE consomme.id_centre = centre.identifiant
+AND situe.identifiant_centre = consomme.id_centre
+AND situe.code_postal = ville.code_postal
+GROUP BY ville.departement, centre.type_centrale
+ORDER BY ville.departement ASC, centre.type_centrale ASC; 
+
 
 # Revenu pour chaque énergie dans chaque département
-SELECT
-FROM 
-WHERE
+SELECT ville.departement as departement, centre.type_centrale as type_energie, SUM(DISTINCT consomme.quantite * facture.prix_kWh) as Revenu_total 
+FROM consomme, centre,  situe, ville, facture
+WHERE consomme.id_centre = centre.identifiant
+AND situe.identifiant_centre = consomme.id_centre
+AND situe.code_postal = ville.code_postal
+AND facture.num_client = consomme.num_client
+GROUP BY ville.departement, centre.type_centrale
+ORDER BY ville.departement ASC, centre.type_centrale ASC;
+
+# Revenu pour chaque énergie dans chaque département du fournisseur 1
+SELECT ville.departement as departement, centre.type_centrale as type_energie, SUM(DISTINCT consomme.quantite * facture.prix_kWh) as Revenu
+FROM consomme, centre,  situe, ville, facture
+WHERE consomme.id_centre = centre.identifiant
+AND STRCMP(facture.nom_fournisseur, 'fournisseur 1') = 0
+AND situe.identifiant_centre = consomme.id_centre
+AND situe.code_postal = ville.code_postal
+AND facture.num_client = consomme.num_client
+GROUP BY ville.departement, centre.type_centrale
+ORDER BY ville.departement ASC, centre.type_centrale ASC;
 
 # Prix de la facture de chaque Client en fonction de sa consommation sur le mois
 SELECT DISTINCT facture.num_client, (facture.prix_kWh * consomme.quantite) AS Prix_total_facture
