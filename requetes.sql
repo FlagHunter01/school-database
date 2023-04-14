@@ -42,12 +42,13 @@ FROM consomme, centre
 WHERE consomme.id_centre = centre.identifiant GROUP BY consomme.id_centre 
 ORDER BY centre.identifiant ASC 
 
-# Quantité de chaque énergie distribuée dans chaque département
-SELECT ville.departement as departement, centre.type_centrale as type_energie, SUM(DISTINCT consomme.quantite) as Quantite_consommee
-FROM consomme INNER JOIN centre ON consomme.id_centre = centre.identifiant, situe INNER JOIN ville ON situe.code_postal = ville.code_postal
+# Quantité de chaque énergie distribuée dans chaque département et en fonction du fourniseur
+SELECT fournisseur.nom AS Nom_fournisseur, ville.departement as departement, centre.type_centrale as type_energie, SUM(DISTINCT consomme.quantite) as Quantite_consommee
+FROM consomme INNER JOIN centre ON consomme.id_centre = centre.identifiant, situe INNER JOIN ville ON situe.code_postal = ville.code_postal, fournisseur INNER JOIN facture ON fournisseur.nom = facture.nom_fournisseur 
 WHERE situe.identifiant_centre = consomme.id_centre
-GROUP BY ville.departement, centre.type_centrale
-ORDER BY ville.departement ASC, centre.type_centrale ASC;
+AND facture.num_client = consomme.num_client
+GROUP BY ville.departement, centre.type_centrale, fournisseur.nom
+ORDER BY fournisseur.nom, ville.departement ASC, centre.type_centrale ASC;
 
 
 # Revenu pour chaque énergie dans chaque département pour chaque fournisseur
