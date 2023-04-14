@@ -6,7 +6,7 @@ GROUP BY appartient.nom_fournisseur;
 
 # Fournisseurs par département
 SELECT DISTINCT fournisseur.nom as Nom_fournisseur, ville.departement as Departement
-FROM fournisseur INNER JOIN facture, ville INNER JOIN habite
+FROM fournisseur INNER JOIN facture ON fournisseur.nom = facture.nom_fournisseur, ville INNER JOIN habite ON habite.code_postal = ville.code_postal
 WHERE facture.num_client = habite.num_client
 order by fournisseur.nom ASC, ville.departement ASC
 
