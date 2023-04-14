@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS projet;
 CREATE DATABASE projet; 
 
 USE projet;
