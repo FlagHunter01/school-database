@@ -19,16 +19,13 @@ AND centre.identifiant = appartient.identifiant_centre
 AND situe.identifiant_centre = appartient.identifiant_centre
 AND ville.code_postal = situe.code_postal
 
-# Centres et énergie du fournisseur 1 dans le département // TODO FIXE STRCMP
+# Centres et énergie du fournisseur 1 dans le département 10
 SELECT DISTINCT centre.identifiant as Identifiant_centre, centre.type_centrale as Type_energie
-FROM centre, situe, ville
+FROM centre, situe, ville, appartient
 WHERE situe.code_postal = ville.code_postal
 AND ville.departement = 10
-AND EXISTS (SELECT centre.identifiant
-            FROM centre, appartient
-            AND STRCMP(appartient.nom_fournisseur, 'fournisseur 1') = 0
-            AND  centre.identifiant = appartient.identifiant_centre)
-
+AND situe.identifiant_centre = centre.identifiant
+AND STRCMP(appartient.nom_fournisseur, 'fournisseur 1') = 0;
 
 # Revenu total du dépaertement
 SELECT ville.departement as Departement, SUM(facture.prix_kWh * consomme.quantite) AS Revenu_total
