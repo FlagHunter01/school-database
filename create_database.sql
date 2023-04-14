@@ -46,7 +46,7 @@ CREATE TABLE facture (
     num_facture int NOT NULL PRIMARY KEY,
     num_client int NOT NULL,
     nom_fournisseur varchar(45) NOT NULL,
-    prix_kWh DECIMAL(1,2) NOT NULL,
+    prix_kWh DECIMAL(2,2) NOT NULL,
 
     FOREIGN KEY (num_client) REFERENCES personne(num_client)
         ON UPDATE CASCADE
